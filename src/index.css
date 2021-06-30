@@ -1,13 +1,78 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+* {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+/* Navbar */
+.nav-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  width: 90%;
+  background: black;
+  height: 100px;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.title {
+  
+  text-decoration: underline 0.15em rgba(0, 0, 0, 0);
+
+  font-size: 50px;
+  position: relative;
+  
+}
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  background-color: rgb(255, 255, 255);
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+.title::after {
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+}
+.title:hover::after,
+.title:focus::after {
+  transform: scale(1);
+}
+.search {
+  font-size: 25px;
+  
+  cursor: pointer;
+}
+.basket {
+  font-size: 25px;
+  
+  cursor: pointer;
 }
