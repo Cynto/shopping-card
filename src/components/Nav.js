@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-function Nav() {
-  const [navColor, setNavColor] = useState({ color: 'white' });
-  const [underlineClass, setUnderlineClass] = useState('white-underline');
-  const [borderClass, setBorderClass] = useState('no-border');
+function Nav(props) {
+  
+  const {navColor, borderClass, underlineClass, openShop, setNavColor, setBorderClass, setUnderlineClass} = props
 
   const setNavColorFunction = (color) => {
-    setNavColor({ color: color });
+    
   };
+
+  const openHome = () => {
+    setNavColor({ color: 'white' });
+    setBorderClass('no-border')
+    setUnderlineClass('white-underline')
+  }
 
   return (
     <div className="nav-container">
@@ -16,11 +21,7 @@ function Nav() {
         <ul className="nav-links">
           <li>
             <NavLink
-              onClick={() => {
-                setNavColorFunction('white');
-                setUnderlineClass('white-underline');
-                setBorderClass('no-border')
-              }}
+              onClick={openHome}
               style={navColor}
               className={`title nav-link text underline-color ${underlineClass}`}
               to="/"
@@ -30,11 +31,7 @@ function Nav() {
           </li>
           <li>
             <NavLink
-              onClick={() => {
-                setNavColorFunction('#1f1f1f');
-                setUnderlineClass('black-underline');
-                setBorderClass('bottom-border')
-              }}
+              onClick={openShop}
               style={navColor}
               className={`shop nav-link text underline-color ${underlineClass}`}
               to="/shop"

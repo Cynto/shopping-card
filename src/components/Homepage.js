@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Homepage() {
+function Homepage(props) {
+  const { openShop } = props;
   return (
     <div className="homepage">
       <div className="top-homepage"></div>
       <div className="bottom-homepage">
         <div className="button-container">
-          <Link to="/shop">
+          <Link onClick={openShop} to="/shop">
             <button>View Catalog</button>
           </Link>
         </div>
