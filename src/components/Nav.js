@@ -1,19 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 function Nav(props) {
-  
-  const {navColor, borderClass, underlineClass, openShop, setNavColor, setBorderClass, setUnderlineClass} = props
-
-  const setNavColorFunction = (color) => {
-    
-  };
-
-  const openHome = () => {
-    setNavColor({ color: 'white' });
-    setBorderClass('no-border')
-    setUnderlineClass('white-underline')
-  }
+  const { navColor, borderClass, underlineClass, leaveHome } = props;
 
   return (
     <div className="nav-container">
@@ -21,7 +10,6 @@ function Nav(props) {
         <ul className="nav-links">
           <li>
             <NavLink
-              onClick={openHome}
               style={navColor}
               className={`title nav-link text underline-color ${underlineClass}`}
               to="/"
@@ -31,7 +19,6 @@ function Nav(props) {
           </li>
           <li>
             <NavLink
-              onClick={openShop}
               style={navColor}
               className={`shop nav-link text underline-color ${underlineClass}`}
               to="/shop"
@@ -44,8 +31,8 @@ function Nav(props) {
           </li>
 
           <li>
-            <NavLink style={navColor} to="/basket">
-              <i className="fas fa-shopping-basket nav-link basket" />
+            <NavLink onClick={leaveHome} style={navColor} to="/basket">
+              <i className="fas fa-shopping-basket nav-link basket-icon" />
             </NavLink>
           </li>
         </ul>
