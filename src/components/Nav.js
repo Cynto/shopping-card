@@ -20,7 +20,7 @@ function Nav(props) {
           <li>
             <NavLink
               style={navColor}
-              className={`shop nav-link text underline-color ${underlineClass}`}
+              className={`shop-nav nav-link text underline-color ${underlineClass}`}
               to="/shop"
             >
               Shop
