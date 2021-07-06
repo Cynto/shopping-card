@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from '../css/Nav.css'
 
 function Nav(props) {
   const { navColor, borderClass, underlineClass, leaveHome } = props;

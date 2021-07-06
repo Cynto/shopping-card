@@ -1,0 +1,96 @@
+/* Basket section*/
+
+.basket {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+.total-container {
+  min-height: 95vh;
+  height: 100%;
+}
+.top-basket-container {
+  height: 27vh;
+  width: 100%;
+}
+.bottom-basket-container {
+  min-height: 70vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bottom-basket-container h2 {
+  font-size: 40px;
+}
+.basket-item-container {
+  margin-top: 80px;
+  width: 75vw;
+  min-height: 40vh;
+  display: flex;
+  flex-wrap: wrap;
+  
+  gap: 58.5px;
+  position: relative;
+}
+.basket-item {
+  width: 28%;
+  
+}
+.basket-item img {
+  width: 100%;
+}
+.basket-item-price {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  color: grey;
+}
+.quantity-container {
+  width: 80px;
+  border: 2px solid #1f1f1f;
+  display: flex;
+}
+.quantity-container button {
+  background: none;
+  cursor: pointer;
+  height: 20px;
+  width: 25px;
+  border: none;
+  border-right: 2px solid #1f1f1f;
+}
+.quantity-container span {
+  width: 30px;
+  text-align: center;
+}
+.quantity-container button:nth-child(3) {
+  border-right: none;
+  border-left: 2px solid #1f1f1f;
+}
+.basket-delete {
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+.basket-delete:hover {
+  text-decoration: underline;
+}
+
+.total-amount-container {
+  position: relative;
+  bottom: 0;
+  height: 100px;
+  width: 90%;
+  background: white;
+  border-top: 1px solid #1f1f1f;
+  margin-top: 40px;
+}
+.top-amount-container  {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.total {
+  font-weight: bolder;
+}

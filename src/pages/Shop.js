@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import ShopNav from './ShopNav';
-import AllItems from './AllItems'
-import Cases from './Cases'
+import ShopNav from '../components/ShopNav';
+import AllItems from '../components/AllItems';
+import Cases from '../components/Cases';
+import styles from '../css/Shop.css'
 import { Switch, Route } from 'react-router-dom';
-
+import uniqid from 'uniqid';
 
 function Shop(props) {
+  
   const [category, setCategory] = useState('All Products');
+  
   useEffect(() => {
     props.leaveHome();
     setCategory('All Products');
@@ -25,14 +28,17 @@ function Shop(props) {
           <div className="shop-items-container">
             <Switch>
               <Route exact path="/shop/">
-                <AllItems setCategory={setCategory}/>
+                <AllItems totalArray={props.totalArray} setCategory={setCategory} />
               </Route>
               <Route path="/shop/cases">
-                <Cases setCategory={setCategory}/>
+                <Cases setCategory={setCategory} />
               </Route>
             </Switch>
           </div>
         </div>
+        <Switch>
+          
+        </Switch>
       </div>
     </div>
   );

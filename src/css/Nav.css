@@ -1,0 +1,136 @@
+/* Navbar */
+.nav-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  width: 90%;
+  height: 100px;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+}
+.no-border {
+  border: none;
+}
+.bottom-border {
+  border-bottom: 1px solid #1f1f1f;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+.nav-link {
+  text-decoration: none;
+}
+
+.title {
+  font-size: 50px;
+  position: relative;
+}
+.text::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+.white-underline::after {
+  background-color: rgb(255, 255, 255);
+}
+.black-underline::after {
+  background-color: #1f1f1f;
+}
+.text::after {
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+}
+.text:hover::after {
+  transform: scale(1);
+}
+.shop-nav {
+  position: relative;
+}
+
+.search {
+  font-size: 25px;
+
+  cursor: pointer;
+}
+.basket-icon {
+  font-size: 25px;
+
+  cursor: pointer;
+}
+
+.homepage {
+  height: 100vh;
+  background-image: url('https://i.pinimg.com/originals/bb/a0/44/bba044b1cae242c46e1effffc3bffe99.jpg');
+}
+.top-homepage {
+  height: 30%;
+  width: 100%;
+}
+.bottom-homepage {
+  height: 70%;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+.button-container button {
+  padding: 16px 40px;
+  background: white;
+  cursor: pointer;
+  color: #1f1f1f;
+  font-size: 15px;
+  font-weight: bolder;
+  border: none;
+  position: relative;
+  z-index: auto;
+  letter-spacing: 1px;
+}
+.button-container button::before {
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  content: ' ';
+  height: 100%;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: transform 0.2s;
+  transition-property: transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  
+
+}
+
+.button-container button:hover::before {
+  transform: translate3d(3px,3px,0);
+}

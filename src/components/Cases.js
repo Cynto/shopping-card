@@ -6,7 +6,7 @@ function Cases(props) {
     setCategory('Cases')
   }, [])
   return (
-    <div>
+    <div className="products-container">
       
     </div>
   )

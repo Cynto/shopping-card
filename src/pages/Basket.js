@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import TotalAmount from './TotalAmount';
+import TotalAmount from '../components/TotalAmount';
 import uniqid from 'uniqid';
+import styles from '../css/Basket.css'
 
 function Basket(props) {
   const { leaveHome, basketArray, setBasketArray } = props;
