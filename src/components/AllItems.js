@@ -1,21 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import uniqid from 'uniqid';
 import { NavLink } from 'react-router-dom';
+import SingleItem from './SingleItem'
 
 function AllItems(props) {
-  const { setCategory, totalArray } = props;
+  const { setCategory, totalArray, setCurrentProduct } = props;
+  
   useEffect(() => {
     setCategory('All Products');
+    const img = document.querySelector('.item-img')
+    const totalItem = document.querySelector('.total-item')
+    totalItem.addEventListener('mouseenter', () => {
+      
+      console.log(totalArray)
+    })
+    
+    console.log(totalItem)
   }, []);
   return (
     <div className="products-container">
       {totalArray.map((item) => (
-        <NavLink key={uniqid()} to={`/product/${item.id}`}>
-          <div  className="shop-item">
-            <img src={item.img} alt={item.alt}></img>
-            <h3>{item.name}</h3>
-            <p>{item.price}</p>
-          </div>
+        <NavLink  className="total-item" onClick={() => setCurrentProduct(item)} key={uniqid()} to={`/product/${item.id}`}>
+          <SingleItem item={item}/>
         </NavLink>
       ))}
     </div>

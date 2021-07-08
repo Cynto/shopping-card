@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import uniqid from 'uniqid';
-import SingleItem from './SingleItem';
+import SingleItem from './SingleItem'
 
-function Cases(props) {
-  const { setCategory, casesArray, setCurrentProduct } = props;
-  useEffect(() => {
-    setCategory('Cases');
-  }, []);
+function Processors(props) {
+  const { processorsArray, setCurrentProduct } = props;
   return (
     <div className="products-container">
-      {casesArray.map((item) => (
+      {processorsArray.map((item) => (
         <NavLink
           onClick={() => setCurrentProduct(item)}
           key={uniqid()}
@@ -23,4 +20,4 @@ function Cases(props) {
   );
 }
 
-export default Cases;
+export default Processors;

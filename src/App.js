@@ -12,43 +12,63 @@ function App() {
   const [underlineClass, setUnderlineClass] = useState('white-underline');
   const [borderClass, setBorderClass] = useState('no-border');
   const [basketArray, setBasketArray] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState({});
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   });
-  const casesArray = [];
-  const processorsArray = [
+  const casesArray = [
     {
-      name: 'AMD CPU',
-      img:
-        'https://infonetonline.org/wp-content/uploads/2021/02/0821-000-5580.jpg',
-      price: formatter.format(49.9),
-      quantity: 1,
-      alt: 'AMD CPU',
-      id: 'AMD-CPU-1',
+      name: 'Phanteks Enthoo Primo',
+      img: [
+        'https://phanteks.com/images/product/Enthoo-Primo/Black/Primo-1z.jpg',
+        'https://phanteks.com/images/product/Enthoo-Primo/Black/Primo-6z.jpg',
+      ],
+
+      alt: 'Enthoo Primo PC Case',
+      price: formatter.format(120),
+      id: 'Phanteks-Enthoo-Primo',
     },
     {
-      name: 'AMD CPU3',
-      img:
+      name: 'Corsair iCUE 4000X RGB',
+      img: [
+        'https://images-na.ssl-images-amazon.com/images/I/81MvIP9T0mL._AC_SL1500_.jpg', 
+        'https://cwsmgmt.corsair.com/pdp/4000-series/corsair-4000x/images/all-the-storage-comp-mobile.png'
+      ],
+      alt: 'Corsair PC Case',
+      price: formatter.format(129.99),
+      id: 'Corsair-4000X-RGB'
+    }
+  ];
+  const processorsArray = [
+    {
+      name: 'AMD Ryzen CPU',
+      img: [
         'https://infonetonline.org/wp-content/uploads/2021/02/0821-000-5580.jpg',
-      price: formatter.format(49.8),
-      quantity: 1,
+        'https://m.media-amazon.com/images/I/61d5eSkfnpL._AC_SS450_.jpg',
+      ],
+      price: formatter.format(49.9),
+      alt: 'AMD Ryzen CPU',
+      id: 'AMD-RYZEN-CPU-1',
+    },
+    {
+      name: 'Intel i9 CPU',
+      img: [
+        'https://www.zenick.it/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/0/1/01c43106-751a-4fa4-962b-28f6160c15fe.jpg',
+        'https://images-na.ssl-images-amazon.com/images/I/81eoV5SY8RL._AC_SY450_.jpg',
+      ],
+      price: formatter.format(659.41),
       alt: 'AMD CPU 3',
       id: 'AMD-CPU-3',
     },
-    {
-      name: 'AMD CPU2',
-      img:
-        'https://infonetonline.org/wp-content/uploads/2021/02/0821-000-5580.jpg',
-      price: formatter.format(49.8),
-      quantity: 1,
-      alt: 'AMD CPU2',
-      id: 'AMD-CPU-2',
-    },
+    
   ];
   const totalArray = casesArray.concat(processorsArray);
 
+  useEffect(() => {
+    console.log(currentProduct);
+  }, [currentProduct]);
   const leaveHome = () => {
     setNavColor({ color: '#1f1f1f' });
     setUnderlineClass('black-underline');
@@ -77,11 +97,17 @@ function App() {
           </Route>
 
           <Route path="/shop">
-            <Shop totalArray={totalArray} leaveHome={leaveHome} />
+            <Shop
+              casesArray={casesArray}
+              processorsArray={processorsArray}
+              totalArray={totalArray}
+              setCurrentProduct={setCurrentProduct}
+              leaveHome={leaveHome}
+            />
           </Route>
           {totalArray.map((item) => (
             <Route key={item.id} path={`/product/${item.id}`}>
-              <Product leaveHome={leaveHome} />
+              <Product currentProduct={currentProduct} leaveHome={leaveHome} />
             </Route>
           ))}
           <Route path="/basket">
