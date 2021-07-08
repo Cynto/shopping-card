@@ -14,7 +14,7 @@
 .left-shop-container {
   height: 90%;
   margin-left: 100px;
-  width: 200px;
+  width: 240px;
 }
 .left-shop-container h3 {
   color: #1f1f1f;
@@ -56,6 +56,7 @@
 .products-container {
   display: flex;
   column-gap: 90px;
+  row-gap: 10px;
   flex-wrap: wrap;
 
   margin-top: 50px;

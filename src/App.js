@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Homepage from './pages/Homepage';
 import Nav from './components/Nav';
-import Footer from './components/Footer';
+
 import Basket from './pages/Basket';
 import Shop from './pages/Shop';
 import Product from './pages/Product';
@@ -33,13 +33,13 @@ function App() {
     {
       name: 'Corsair iCUE 4000X RGB',
       img: [
-        'https://images-na.ssl-images-amazon.com/images/I/81MvIP9T0mL._AC_SL1500_.jpg', 
-        'https://cwsmgmt.corsair.com/pdp/4000-series/corsair-4000x/images/all-the-storage-comp-mobile.png'
+        'https://images-na.ssl-images-amazon.com/images/I/81MvIP9T0mL._AC_SL1500_.jpg',
+        'https://cwsmgmt.corsair.com/pdp/4000-series/corsair-4000x/images/all-the-storage-comp-mobile.png',
       ],
       alt: 'Corsair PC Case',
       price: formatter.format(129.99),
-      id: 'Corsair-4000X-RGB'
-    }
+      id: 'Corsair-4000X-RGB',
+    },
   ];
   const processorsArray = [
     {
@@ -62,9 +62,79 @@ function App() {
       alt: 'AMD CPU 3',
       id: 'AMD-CPU-3',
     },
-    
   ];
-  const totalArray = casesArray.concat(processorsArray);
+  const motherboardsArray = [
+    {
+      name: 'Gigabyte Ga-B365M-D3H Motherboard',
+      img: [
+        'https://images-na.ssl-images-amazon.com/images/I/71cb2RG0hmL._AC_SY450_.jpg',
+        'https://www.gigabyte.com/FileUpload/Global/KeyFeature/1146/images/spec-small.png',
+      ],
+      price: formatter.format(120),
+      alt: 'Gigabyte motherboard',
+      id: 'GIGABYTE-GA-B365M-MOTHERBOARD',
+    },
+    {
+      name: 'ASUS B450 Gaming Motherboard',
+      img: [
+        'https://images-na.ssl-images-amazon.com/images/I/91buE992yIL._AC_SX466_.jpg',
+        'https://dlcdnwebimgs.asus.com/gain/6BDDB156-FB29-4D59-A48D-5D386A90D579/w717/h525',
+      ],
+      price: formatter.format(125.99),
+      alt: 'ASUS Motherboard',
+      id: 'ASUS-B450-MOTHERBOARD',
+    },
+  ];
+  const memoryArray = [
+    {
+      name: 'Corsair High Performance 16GB RAM',
+      img: [
+        'https://images-na.ssl-images-amazon.com/images/I/61xASlWV%2BEL._AC_SL1000_.jpg',
+        'https://images-na.ssl-images-amazon.com/images/I/51kHiPeTSmL._AC_SX466_.jpg',
+      ],
+      price: formatter.format(99.99),
+      alt: 'Corsair RAM',
+      id: 'CORSAIR-16GB-RAM',
+    },
+    {
+      name: 'G.SKILL Trident 16GB RAM',
+      img: [
+        'https://d3fa68hw0m2vcc.cloudfront.net/4ad/173596822.jpeg',
+        'https://d3fa68hw0m2vcc.cloudfront.net/6ad/173596843.jpeg',
+      ],
+      price: formatter.format(89.99),
+      alt: 'GSKILL RAM',
+      id: 'GSKILL-16GB-RAM',
+    },
+  ];
+  const gpuArray = [
+    {
+      name: 'Nvidia RTX 3090 Graphics Card',
+      img: [
+        'https://images-na.ssl-images-amazon.com/images/I/61wbV8oqAbL._AC_SL1500_.jpg',
+        'https://images.stockx.com/images/NVIDIA-GeForce-RTX-3090-Graphics-Card--Founders-Edition-Black.jpg?fit=fill&bg=FFFFFF&w=700&h=500&auto=format,compress&q=90&dpr=2&trim=color&updated_at=1606323410',
+      ],
+      price: formatter.format(999.99),
+      alt: 'Nvidia GPU',
+      id: 'NVIDIA-3090-GPU',
+    },
+    {
+      name: 'AMD Radeon RX 6900 XT Graphics Card',
+      img: [
+        'https://images-na.ssl-images-amazon.com/images/I/81U5H5c0jyL._AC_SL1500_.jpg',
+        'https://images.stockx.com/images/AMD-Radeon-RX6900-XT-Graphics-Cards.png?fit=clip&bg=FFFFFF&w=1140&h=500&auto=compress&q=90&dpr=2&trim=color&updated_at=1607624156&fm=jpg&ixlib=react-9.1.5',
+      ],
+      price: formatter.format(699.99),
+      alt: 'AMD GPU',
+      id: 'AMD-RADEON-6900-GPU',
+    },
+  ];
+  const totalArray = casesArray.concat(
+    processorsArray,
+    motherboardsArray,
+    gpuArray,
+    memoryArray,
+  );
 
   useEffect(() => {
     console.log(currentProduct);
@@ -100,6 +170,9 @@ function App() {
             <Shop
               casesArray={casesArray}
               processorsArray={processorsArray}
+              memoryArray={memoryArray}
+              motherboardsArray={motherboardsArray}
+              gpuArray={gpuArray}
               totalArray={totalArray}
               setCurrentProduct={setCurrentProduct}
               leaveHome={leaveHome}
@@ -118,7 +191,6 @@ function App() {
             />
           </Route>
         </Switch>
-        <Footer />
       </div>
     </Router>
   );

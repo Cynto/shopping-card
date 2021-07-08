@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 import uniqid from 'uniqid';
 import SingleItem from './SingleItem'
 
-function Processors(props) {
-  const { processorsArray, setCurrentProduct, setCategory } = props;
+function Memory(props) {
+  const { memoryArray, setCurrentProduct, setCategory } = props;
   useEffect(() => {
-    setCategory('Processors');
+    setCategory('Memory');
   }, []);
   return (
     <div className="products-container">
-      {processorsArray.map((item) => (
+      {memoryArray.map((item) => (
         <NavLink
           onClick={() => setCurrentProduct(item)}
           key={uniqid()}
@@ -23,4 +23,4 @@ function Processors(props) {
   );
 }
 
-export default Processors;
+export default Memory;

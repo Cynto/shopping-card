@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import TotalAmount from '../components/TotalAmount';
 import uniqid from 'uniqid';
 import styles from '../css/Basket.css'
+import Footer from '../components/Footer';
 
 function Basket(props) {
   const { leaveHome, basketArray, setBasketArray } = props;
@@ -62,6 +63,7 @@ function Basket(props) {
           </div>
           <TotalAmount basketArray={basketArray}/>
         </div>
+        <Footer />
       </div>
     </div>
   );

@@ -8,14 +8,7 @@ function AllItems(props) {
   
   useEffect(() => {
     setCategory('All Products');
-    const img = document.querySelector('.item-img')
-    const totalItem = document.querySelector('.total-item')
-    totalItem.addEventListener('mouseenter', () => {
-      
-      console.log(totalArray)
-    })
     
-    console.log(totalItem)
   }, []);
   return (
     <div className="products-container">

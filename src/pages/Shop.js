@@ -3,16 +3,19 @@ import ShopNav from '../components/ShopNav';
 import AllItems from '../components/AllItems';
 import Cases from '../components/Cases';
 import Processors from '../components/Processors'
+import Memory from '../components/Memory'
 import styles from '../css/Shop.css';
 import { Switch, Route } from 'react-router-dom';
 import uniqid from 'uniqid';
+import Motherboards from '../components/Motherboards';
+import GraphicsCards from '../components/GraphicsCards';
+import Footer from '../components/Footer';
 
 function Shop(props) {
   const [category, setCategory] = useState('All Products');
-  const { leaveHome, totalArray, casesArray, processorsArray, setCurrentProduct } = props;
+  const { leaveHome, totalArray, casesArray, processorsArray, setCurrentProduct, memoryArray, motherboardsArray, gpuArray } = props;
   useEffect(() => {
     leaveHome();
-    setCategory('All Products');
   }, []);
   return (
     <div className="shop">
@@ -40,10 +43,19 @@ function Shop(props) {
               <Route path="/shop/processors">
                 <Processors setCurrentProduct={setCurrentProduct} setCategory={setCategory} processorsArray={processorsArray}/>
               </Route>
+              <Route path="/shop/motherboards">
+                <Motherboards setCurrentProduct={setCurrentProduct} setCategory={setCategory} motherboardsArray={motherboardsArray} />
+              </Route>
+              <Route path="/shop/graphics-cards">
+                <GraphicsCards setCurrentProduct={setCurrentProduct} setCategory={setCategory} gpuArray={gpuArray} />
+              </Route>
+              <Route path="/shop/memory">
+                <Memory setCurrentProduct={setCurrentProduct} setCategory={setCategory} memoryArray={memoryArray} />
+              </Route>
             </Switch>
           </div>
         </div>
-        <Switch></Switch>
+        <Footer />
       </div>
     </div>
   );
