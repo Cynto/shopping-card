@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import TotalAmount from '../components/TotalAmount';
 import uniqid from 'uniqid';
-import '../css/Basket.css'
+import '../css/Basket.css';
 import Footer from '../components/Footer';
-
+import { Link } from 'react-router-dom';
 function Basket(props) {
   const { leaveHome, basketArray, setBasketArray } = props;
   useEffect(() => {
@@ -38,7 +38,9 @@ function Basket(props) {
             {basketArray.map((item) => (
               <div key={uniqid()} className="basket-item">
                 <img src={item.img[0]} alt={item.alt} />
-                <h3>{item.name}</h3>
+                <Link to={`/product/${item.id}`}>
+                  {item.name}
+                </Link>
                 <p className="basket-item-price">{item.price}</p>
                 <div className="quantity-container">
                   <button
@@ -62,9 +64,8 @@ function Basket(props) {
               </div>
             ))}
           </div>
-          
         </div>
-        <TotalAmount basketArray={basketArray}/>
+        <TotalAmount basketArray={basketArray} />
         <Footer />
       </div>
     </div>

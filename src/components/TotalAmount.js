@@ -6,6 +6,7 @@ function TotalAmount(props) {
   const [totalAmount, setTotalAmount] = useState(
     basketArray.reduce((acc, curr) => acc + curr.price * curr.quantity, 0),
   );
+  
   useEffect(() => {
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',

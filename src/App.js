@@ -183,7 +183,7 @@ function App() {
           </Route>
           {totalArray.map((item) => (
             <Route key={item.id} path={`/product/${item.id}`}>
-              <Product currentProduct={currentProduct} leaveHome={leaveHome} setBasketArray={setBasketArray} />
+              <Product currentProduct={currentProduct} leaveHome={leaveHome} basketArray={basketArray} setBasketArray={setBasketArray} />
             </Route>
           ))}
           <Route path="/basket">

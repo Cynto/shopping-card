@@ -66,10 +66,12 @@
 }
 .buy-button-container {
   margin-top: 100px;
-  
+  display: flex;
+  flex-direction: column;
 }
-.buy-button-container button {
-  padding: 20px;
+.add-button {
+  width: 159px;
+  height: 64px;
   font-size: 20px;
   border-radius: 0px;
   border: none;
@@ -77,7 +79,7 @@
   cursor: pointer;
   position: relative;
 }
-.buy-button-container button::before {
+.add-button::before {
   border: 2px solid rgb(209, 184, 163);
   box-sizing: border-box;
   content: ' ';
@@ -94,6 +96,103 @@
   transition-delay: 0s;
   
 }
-.buy-button-container button:hover::before {
+.add-button:hover::before {
   transform: translate3d(3px,3px,0);
+}
+
+.remove-button {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 64px;
+
+  font-size: 20px;
+  border-radius: 0px;
+  border: none;
+  background: rgb(129, 123, 117);
+  cursor: pointer;
+  position: relative;
+}
+.remove-button::before {
+  border: 2px solid rgb(129, 123, 117);
+  box-sizing: border-box;
+  content: ' ';
+  height: 100%;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: transform 0.2s;
+  transition-property: transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+.remove-button:hover::before {
+  transform: translate3d(3px,3px,0);
+}
+.added-message-container {
+  width: 70%;
+  height: 150px;
+  top: 50%;
+  right: 10%;
+  background: white;
+  position: absolute;
+  border: 1px solid grey;
+  display: flex;
+  justify-content: center;
+}
+.main-message-container {
+  width: 99%;
+  
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 15px;
+}
+.added-message-container h3 {
+  font-weight: bolder;
+  font-size: 30px;
+}
+.main-message-container button {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 0px;
+  border: none;
+  background: rgb(209, 184, 163);
+  cursor: pointer;
+  position: relative;
+}
+.main-message-container button::before {
+  border: 2px solid rgb(209, 184, 163);
+  box-sizing: border-box;
+  content: ' ';
+  height: 100%;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: transform 0.2s;
+  transition-property: transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  
+}
+.main-message-container button:hover::before {
+  transform: translate3d(3px,3px,0);
+}
+.exit-button {
+  height: 15px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #1f1f1f;
+  margin-right: 5px;
+  margin-top: 5px;
 }
