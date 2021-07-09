@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import currency from 'currency.js'
 
 function TotalAmount(props) {
   const { basketArray } = props;
@@ -15,7 +16,7 @@ function TotalAmount(props) {
       formatter.format(
         Math.round(
           basketArray.reduce(
-            (acc, curr) => acc + curr.price * curr.quantity,
+            (acc, curr) => currency(acc).value + currency(curr.price).value * curr.quantity,
             0,
           ) * 100,
         ) / 100,

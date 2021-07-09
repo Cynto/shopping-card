@@ -2,11 +2,12 @@
 
 footer {
   display: flex;
-  
-  height: 50px;
+  margin-top: 10px;
+  min-height: 50px;
   background: #1f1f1f;
   width: 100%;
   color: white;
+  
 }
 footer a {
   text-decoration: none;
@@ -31,7 +32,7 @@ footer i {
 
   align-items: flex-end;
   width: 50%;
-  height: 100%;
+  min-height: 100%;
 }
 
 .right-footer {
@@ -39,7 +40,7 @@ footer i {
   justify-content: flex-end;
   align-items: flex-end;
   width: 50%;
-  height: 100%;
+  min-height: 100%;
 }
 
 .right-footer i {

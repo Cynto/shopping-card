@@ -7,13 +7,14 @@ import Shop from './pages/Shop';
 import Product from './pages/Product';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
+
 function App() {
   const [navColor, setNavColor] = useState({ color: 'white' });
   const [underlineClass, setUnderlineClass] = useState('white-underline');
   const [borderClass, setBorderClass] = useState('no-border');
   const [basketArray, setBasketArray] = useState([]);
-  const [currentProduct, setCurrentProduct] = useState({});
-
+  
+  
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -28,7 +29,7 @@ function App() {
 
       alt: 'Enthoo Primo PC Case',
       price: formatter.format(120),
-      id: 'Phanteks-Enthoo-Primo',
+      id: 'PHANTEKS-ENTHOO-PRIMO',
     },
     {
       name: 'Corsair iCUE 4000X RGB',
@@ -38,7 +39,7 @@ function App() {
       ],
       alt: 'Corsair PC Case',
       price: formatter.format(129.99),
-      id: 'Corsair-4000X-RGB',
+      id: 'CORSAIR-4000X-RGB',
     },
   ];
   const processorsArray = [
@@ -48,7 +49,7 @@ function App() {
         'https://infonetonline.org/wp-content/uploads/2021/02/0821-000-5580.jpg',
         'https://m.media-amazon.com/images/I/61d5eSkfnpL._AC_SS450_.jpg',
       ],
-      price: formatter.format(49.9),
+      price: formatter.format(499.9),
       alt: 'AMD Ryzen CPU',
       id: 'AMD-RYZEN-CPU-1',
     },
@@ -59,8 +60,8 @@ function App() {
         'https://images-na.ssl-images-amazon.com/images/I/81eoV5SY8RL._AC_SY450_.jpg',
       ],
       price: formatter.format(659.41),
-      alt: 'AMD CPU 3',
-      id: 'AMD-CPU-3',
+      alt: 'Intel i9 CPU',
+      id: 'Intel-i9-CPU',
     },
   ];
   const motherboardsArray = [
@@ -135,10 +136,12 @@ function App() {
     gpuArray,
     memoryArray,
   );
+  
+  const [currentProduct, setCurrentProduct] = useState(casesArray[0]);
 
   useEffect(() => {
-    console.log(currentProduct);
-  }, [currentProduct]);
+    console.log(basketArray);
+  }, [basketArray]);
   const leaveHome = () => {
     setNavColor({ color: '#1f1f1f' });
     setUnderlineClass('black-underline');
@@ -180,7 +183,7 @@ function App() {
           </Route>
           {totalArray.map((item) => (
             <Route key={item.id} path={`/product/${item.id}`}>
-              <Product currentProduct={currentProduct} leaveHome={leaveHome} />
+              <Product currentProduct={currentProduct} leaveHome={leaveHome} setBasketArray={setBasketArray} />
             </Route>
           ))}
           <Route path="/basket">

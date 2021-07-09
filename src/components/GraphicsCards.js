@@ -7,6 +7,7 @@ function GraphicsCards(props) {
   const { gpuArray, setCurrentProduct, setCategory } = props;
   useEffect(() => {
     setCategory('Graphics Cards');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="products-container">

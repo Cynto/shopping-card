@@ -8,19 +8,25 @@
 }
 .bottom-shop-container {
   min-height: 70vh;
-  max-width: 100vw;
+  width: 100vw;
   display: flex;
 }
 .left-shop-container {
   height: 90%;
-  margin-left: 100px;
-  width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 440px;
+}
+.category-container {
+  width: 200px;
 }
 .left-shop-container h3 {
   color: #1f1f1f;
   font-size: 14px;
   font-weight: bolder;
-  max-width: 180px;
+  width: 100px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -40,7 +46,9 @@
   display: flex;
   flex-direction: column;
   row-gap: 15px;
+  width: 200px;
 }
+
 .shop-nav-container a {
   text-decoration: none;
   color: #1f1f1f;
@@ -48,6 +56,9 @@
   font-weight: bolder;
   margin-left: 5px;
   
+}
+.shop-nav-container a::after {
+
 }
 .shop-items-container {
   width: 90%;

@@ -7,6 +7,7 @@ function Cases(props) {
   const { setCategory, casesArray, setCurrentProduct } = props;
   useEffect(() => {
     setCategory('Cases');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="products-container">

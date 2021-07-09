@@ -7,6 +7,7 @@ function Processors(props) {
   const { processorsArray, setCurrentProduct, setCategory } = props;
   useEffect(() => {
     setCategory('Processors');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="products-container">

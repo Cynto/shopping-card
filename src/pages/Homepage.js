@@ -6,6 +6,7 @@ function Homepage(props) {
 
   useEffect(() => {
    openHome()
+   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div className="homepage">

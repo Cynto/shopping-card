@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import uniqid from 'uniqid';
 import { NavLink } from 'react-router-dom';
 import SingleItem from './SingleItem'
@@ -8,7 +8,7 @@ function AllItems(props) {
   
   useEffect(() => {
     setCategory('All Products');
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="products-container">

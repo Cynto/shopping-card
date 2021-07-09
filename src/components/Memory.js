@@ -7,6 +7,7 @@ function Memory(props) {
   const { memoryArray, setCurrentProduct, setCategory } = props;
   useEffect(() => {
     setCategory('Memory');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="products-container">

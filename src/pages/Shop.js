@@ -2,20 +2,30 @@ import React, { useState, useEffect } from 'react';
 import ShopNav from '../components/ShopNav';
 import AllItems from '../components/AllItems';
 import Cases from '../components/Cases';
-import Processors from '../components/Processors'
-import Memory from '../components/Memory'
-import styles from '../css/Shop.css';
+import Processors from '../components/Processors';
+import Memory from '../components/Memory';
+import '../css/Shop.css';
 import { Switch, Route } from 'react-router-dom';
-import uniqid from 'uniqid';
+
 import Motherboards from '../components/Motherboards';
 import GraphicsCards from '../components/GraphicsCards';
 import Footer from '../components/Footer';
 
 function Shop(props) {
   const [category, setCategory] = useState('All Products');
-  const { leaveHome, totalArray, casesArray, processorsArray, setCurrentProduct, memoryArray, motherboardsArray, gpuArray } = props;
+  const {
+    leaveHome,
+    totalArray,
+    casesArray,
+    processorsArray,
+    setCurrentProduct,
+    memoryArray,
+    motherboardsArray,
+    gpuArray,
+  } = props;
   useEffect(() => {
     leaveHome();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="shop">
@@ -23,9 +33,11 @@ function Shop(props) {
         <div className="top-shop-container"></div>
         <div className="bottom-shop-container">
           <div className="left-shop-container">
-            <h3>
-              Shop / <br /> <p>{category}</p>
-            </h3>
+            <div className="category-container">
+              <h3>
+                Shop / <br /> <p>{category}</p>
+              </h3>
+            </div>
             <ShopNav setCategory={setCategory} />
           </div>
           <div className="shop-items-container">
@@ -38,19 +50,39 @@ function Shop(props) {
                 />
               </Route>
               <Route path="/shop/cases">
-                <Cases setCurrentProduct={setCurrentProduct} casesArray={casesArray} setCategory={setCategory} />
+                <Cases
+                  setCurrentProduct={setCurrentProduct}
+                  casesArray={casesArray}
+                  setCategory={setCategory}
+                />
               </Route>
               <Route path="/shop/processors">
-                <Processors setCurrentProduct={setCurrentProduct} setCategory={setCategory} processorsArray={processorsArray}/>
+                <Processors
+                  setCurrentProduct={setCurrentProduct}
+                  setCategory={setCategory}
+                  processorsArray={processorsArray}
+                />
               </Route>
               <Route path="/shop/motherboards">
-                <Motherboards setCurrentProduct={setCurrentProduct} setCategory={setCategory} motherboardsArray={motherboardsArray} />
+                <Motherboards
+                  setCurrentProduct={setCurrentProduct}
+                  setCategory={setCategory}
+                  motherboardsArray={motherboardsArray}
+                />
               </Route>
               <Route path="/shop/graphics-cards">
-                <GraphicsCards setCurrentProduct={setCurrentProduct} setCategory={setCategory} gpuArray={gpuArray} />
+                <GraphicsCards
+                  setCurrentProduct={setCurrentProduct}
+                  setCategory={setCategory}
+                  gpuArray={gpuArray}
+                />
               </Route>
               <Route path="/shop/memory">
-                <Memory setCurrentProduct={setCurrentProduct} setCategory={setCategory} memoryArray={memoryArray} />
+                <Memory
+                  setCurrentProduct={setCurrentProduct}
+                  setCategory={setCategory}
+                  memoryArray={memoryArray}
+                />
               </Route>
             </Switch>
           </div>

@@ -7,6 +7,7 @@ function Motherboards(props) {
   const { motherboardsArray, setCurrentProduct, setCategory } = props;
   useEffect(() => {
     setCategory('Motherboards');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="products-container">

@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import TotalAmount from '../components/TotalAmount';
 import uniqid from 'uniqid';
-import styles from '../css/Basket.css'
+import '../css/Basket.css'
 import Footer from '../components/Footer';
 
 function Basket(props) {
   const { leaveHome, basketArray, setBasketArray } = props;
   useEffect(() => {
     leaveHome();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateQuantity = (negOrPos, name) => {
@@ -36,7 +37,7 @@ function Basket(props) {
           <div className="basket-item-container">
             {basketArray.map((item) => (
               <div key={uniqid()} className="basket-item">
-                <img src={item.img} alt={item.alt} />
+                <img src={item.img[0]} alt={item.alt} />
                 <h3>{item.name}</h3>
                 <p className="basket-item-price">{item.price}</p>
                 <div className="quantity-container">
@@ -61,8 +62,9 @@ function Basket(props) {
               </div>
             ))}
           </div>
-          <TotalAmount basketArray={basketArray}/>
+          
         </div>
+        <TotalAmount basketArray={basketArray}/>
         <Footer />
       </div>
     </div>
