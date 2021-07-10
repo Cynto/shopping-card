@@ -68,6 +68,7 @@
   margin-top: 100px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 }
 .add-button {
   width: 159px;
@@ -102,7 +103,7 @@
 
 .remove-button {
   margin-top: 30px;
-  margin-bottom: 30px;
+  
   height: 64px;
 
   font-size: 20px;
@@ -198,11 +199,16 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .product-page {
+    height: 100%;
+  }
   .bottom-container {
     flex-direction: column;
+    
+    height: 100%;
   }
   .total-product-page-container {
-    height: 200vh;
+    height: 100%;
   }
   .gallery-container {
     margin-top: 20px;
@@ -216,6 +222,8 @@
   }
   .main-img-container {
     margin-top: 10px;
+    margin-left: 50px;
+    height: 100%;
   }
   .title-price-container {
     margin-top: 20px;
@@ -225,14 +233,17 @@
   }
   .buy-button-container {
     margin-top: 30px;
+    margin-bottom: 30px;
   }
   .remove-button {
     width: 250px;
+    margin-bottom: 0px;
   }
   .added-message-container {
-    top: 140%;
+    
     width: 90%;
-    right: 0%;
+    right: 9%;
+    position: fixed;
   }
   .main-message-container {
     text-align: center;

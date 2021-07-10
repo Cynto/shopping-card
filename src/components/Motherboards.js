@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 import SingleItem from './SingleItem'
 
 function Motherboards(props) {
-  const { motherboardsArray, setCurrentProduct, setCategory } = props;
+  const { motherboardsArray, setCategory } = props;
   useEffect(() => {
     setCategory('Motherboards');
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -13,7 +13,7 @@ function Motherboards(props) {
     <div className="products-container">
       {motherboardsArray.map((item) => (
         <NavLink
-          onClick={() => setCurrentProduct(item)}
+          
           key={uniqid()}
           to={`/product/${item.id}`}
         >

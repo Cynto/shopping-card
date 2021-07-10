@@ -63,12 +63,14 @@ function Product(props) {
               src={currentProduct.img[0]}
               alt={currentProduct.alt}
               className={img1Class}
+              onClick={(e) => setActiveImg(e)}
               onMouseEnter={(e) => setActiveImg(e)}
             />
             <img
               src={currentProduct.img[1]}
               alt={currentProduct.alt}
               className={img2Class}
+              onClick={(e) => setActiveImg(e)}
               onMouseEnter={(e) => setActiveImg(e)}
             />
           </div>

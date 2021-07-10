@@ -18,7 +18,6 @@ function Shop(props) {
     totalArray,
     casesArray,
     processorsArray,
-    setCurrentProduct,
     memoryArray,
     motherboardsArray,
     gpuArray,
@@ -43,46 +42,28 @@ function Shop(props) {
           <div className="shop-items-container">
             <Switch>
               <Route exact path="/shop/">
-                <AllItems
-                  setCurrentProduct={setCurrentProduct}
-                  totalArray={totalArray}
-                  setCategory={setCategory}
-                />
+                <AllItems totalArray={totalArray} setCategory={setCategory} />
               </Route>
               <Route path="/shop/cases">
-                <Cases
-                  setCurrentProduct={setCurrentProduct}
-                  casesArray={casesArray}
-                  setCategory={setCategory}
-                />
+                <Cases casesArray={casesArray} setCategory={setCategory} />
               </Route>
               <Route path="/shop/processors">
                 <Processors
-                  setCurrentProduct={setCurrentProduct}
                   setCategory={setCategory}
                   processorsArray={processorsArray}
                 />
               </Route>
               <Route path="/shop/motherboards">
                 <Motherboards
-                  setCurrentProduct={setCurrentProduct}
                   setCategory={setCategory}
                   motherboardsArray={motherboardsArray}
                 />
               </Route>
               <Route path="/shop/graphics-cards">
-                <GraphicsCards
-                  setCurrentProduct={setCurrentProduct}
-                  setCategory={setCategory}
-                  gpuArray={gpuArray}
-                />
+                <GraphicsCards setCategory={setCategory} gpuArray={gpuArray} />
               </Route>
               <Route path="/shop/memory">
-                <Memory
-                  setCurrentProduct={setCurrentProduct}
-                  setCategory={setCategory}
-                  memoryArray={memoryArray}
-                />
+                <Memory setCategory={setCategory} memoryArray={memoryArray} />
               </Route>
             </Switch>
           </div>

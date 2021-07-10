@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import SingleItem from './SingleItem'
 
 function AllItems(props) {
-  const { setCategory, totalArray, setCurrentProduct } = props;
+  const { setCategory, totalArray } = props;
   
   useEffect(() => {
     setCategory('All Products');
@@ -13,7 +13,7 @@ function AllItems(props) {
   return (
     <div className="products-container">
       {totalArray.map((item) => (
-        <NavLink  className="total-item" onClick={() => setCurrentProduct(item)} key={uniqid()} to={`/product/${item.id}`}>
+        <NavLink  className="total-item"  key={uniqid()} to={`/product/${item.id}`}>
           <SingleItem item={item}/>
         </NavLink>
       ))}

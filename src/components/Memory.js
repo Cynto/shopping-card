@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 import SingleItem from './SingleItem'
 
 function Memory(props) {
-  const { memoryArray, setCurrentProduct, setCategory } = props;
+  const { memoryArray, setCategory } = props;
   useEffect(() => {
     setCategory('Memory');
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -13,7 +13,7 @@ function Memory(props) {
     <div className="products-container">
       {memoryArray.map((item) => (
         <NavLink
-          onClick={() => setCurrentProduct(item)}
+          
           key={uniqid()}
           to={`/product/${item.id}`}
         >

@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 import SingleItem from './SingleItem'
 
 function Processors(props) {
-  const { processorsArray, setCurrentProduct, setCategory } = props;
+  const { processorsArray, setCategory } = props;
   useEffect(() => {
     setCategory('Processors');
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -13,7 +13,7 @@ function Processors(props) {
     <div className="products-container">
       {processorsArray.map((item) => (
         <NavLink
-          onClick={() => setCurrentProduct(item)}
+          
           key={uniqid()}
           to={`/product/${item.id}`}
         >

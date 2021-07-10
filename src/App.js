@@ -7,14 +7,20 @@ import Shop from './pages/Shop';
 import Product from './pages/Product';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
-
 function App() {
   const [navColor, setNavColor] = useState({ color: 'white' });
   const [underlineClass, setUnderlineClass] = useState('white-underline');
   const [borderClass, setBorderClass] = useState('no-border');
-  const [basketArray, setBasketArray] = useState([]);
-  
-  
+  const [basketArray, setBasketArray] = useState(
+    localStorage.getItem('basketArray') === null
+      ? []
+      : () => {
+          let basketArrayLocal = localStorage.getItem('basketArray');
+          basketArrayLocal = JSON.parse(basketArrayLocal);
+          return basketArrayLocal;
+        },
+  );
+
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -136,12 +142,11 @@ function App() {
     gpuArray,
     memoryArray,
   );
-  
-  const [currentProduct, setCurrentProduct] = useState(casesArray[0]);
 
   useEffect(() => {
-    console.log(basketArray);
+    localStorage.setItem('basketArray', JSON.stringify(basketArray));
   }, [basketArray]);
+
   const leaveHome = () => {
     setNavColor({ color: '#1f1f1f' });
     setUnderlineClass('black-underline');
@@ -177,13 +182,20 @@ function App() {
               motherboardsArray={motherboardsArray}
               gpuArray={gpuArray}
               totalArray={totalArray}
-              setCurrentProduct={setCurrentProduct}
               leaveHome={leaveHome}
             />
           </Route>
-          {totalArray.map((item) => (
-            <Route key={item.id} path={`/product/${item.id}`}>
-              <Product currentProduct={currentProduct} leaveHome={leaveHome} basketArray={basketArray} setBasketArray={setBasketArray} />
+          {totalArray.map((currentProduct) => (
+            <Route
+              key={currentProduct.id}
+              path={`/product/${currentProduct.id}`}
+            >
+              <Product
+                currentProduct={currentProduct}
+                leaveHome={leaveHome}
+                basketArray={basketArray}
+                setBasketArray={setBasketArray}
+              />
             </Route>
           ))}
           <Route path="/basket">
