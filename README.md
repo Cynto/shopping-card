@@ -1,6 +1,6 @@
 # InTech Shopping Cart
 
-This React application allows the user to browse a list of computer related items, and add them to the basket which displays the total amount of money due.
+This React application allows the user to browse different categories of computer related items, and add them to the basket which displays the total amount of money due.
 
 [Live Demo](https://cynto.github.io/shopping-cart/#/)
 
