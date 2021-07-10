@@ -88,12 +88,12 @@ function Product(props) {
                 }}
               >
                 {!basketArray.some((item) => item.name === currentProduct.name)
-                  ? 'Add To Cart'
+                  ? 'Add To Basket'
                   : 'Add Another'}
               </button>
               {basketArray.some((item) => item.name === currentProduct.name) ? (
                 <button className="remove-button" onClick={removeFromBasket}>
-                  Remove From Cart
+                  Remove From Basket
                 </button>
               ) : null}
             </div>
@@ -103,7 +103,7 @@ function Product(props) {
         {addedToCart === true ? (
             <div className="added-message-container">
               <div className="main-message-container">
-                <h3>Successfully Added Item To Cart!</h3>
+                <h3>Successfully Added Item To Basket!</h3>
                 <Link to="/basket">
                   <button>Go To Basket</button>
                 </Link>

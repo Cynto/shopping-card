@@ -196,3 +196,45 @@
   margin-right: 5px;
   margin-top: 5px;
 }
+
+@media only screen and (max-width: 600px) {
+  .bottom-container {
+    flex-direction: column;
+  }
+  .total-product-page-container {
+    height: 200vh;
+  }
+  .gallery-container {
+    margin-top: 20px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    column-gap: 10px;
+  }
+  .gallery-container img {
+    max-width: 70px;
+  }
+  .main-img-container {
+    margin-top: 10px;
+  }
+  .title-price-container {
+    margin-top: 20px;
+  }
+  .title-price-container p {
+    margin-top: 10px;
+  }
+  .buy-button-container {
+    margin-top: 30px;
+  }
+  .remove-button {
+    width: 250px;
+  }
+  .added-message-container {
+    top: 140%;
+    width: 90%;
+    right: 0%;
+  }
+  .main-message-container {
+    text-align: center;
+  }
+}

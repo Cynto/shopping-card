@@ -26,7 +26,7 @@
   justify-content: space-between;
   width: 90%;
 }
-.nav-links li {
+.nav-link-li {
   display: flex;
   align-items: center;
 }
@@ -133,4 +133,10 @@
 
 .button-container button:hover::before {
   transform: translate3d(3px,3px,0);
+}
+
+@media only screen and (max-width: 600px) {
+  .search-link {
+    display: none;
+  }
 }

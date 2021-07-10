@@ -29,7 +29,7 @@
 }
 .basket-item-container {
   margin-top: 40px;
-  width: 75vw;
+  width: 80vw;
   
   display: flex;
   flex-wrap: wrap;
@@ -111,4 +111,29 @@
 }
 .total {
   font-weight: bolder;
+}
+
+@media only screen and (max-width: 600px) {
+  .top-basket-container {
+    height: 200px;
+  }
+  .bottom-basket-container h2 {
+    font-size: 25px;
+  }
+  .basket-item-container {
+    gap: 0px;
+    justify-content: center;
+  }
+  .basket-item {
+    border-top: 1px solid grey;
+  }
+  .basket-item:nth-child(1) {
+    border-top: none;
+  }
+  .basket-delete {
+    padding-bottom: 5px;
+  }
+  .total-amount-container {
+    height: 50px;
+  }
 }

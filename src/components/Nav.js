@@ -9,7 +9,7 @@ function Nav(props) {
     <div className="nav-container">
       <nav className={`navbar ${borderClass}`}>
         <ul className="nav-links">
-          <li>
+          <li className="nav-link-li">
             <NavLink
               style={navColor}
               className={`title nav-link text underline-color ${underlineClass}`}
@@ -18,7 +18,7 @@ function Nav(props) {
               InTech
             </NavLink>
           </li>
-          <li>
+          <li className="nav-link-li">
             <NavLink
               style={navColor}
               className={`shop-nav nav-link text underline-color ${underlineClass}`}
@@ -27,11 +27,11 @@ function Nav(props) {
               Shop
             </NavLink>
           </li>
-          <li>
+          <li className="nav-link-li search-link">
             <i style={navColor} className="fas fa-search nav-link search"></i>
           </li>
 
-          <li>
+          <li className="nav-link-li">
             <NavLink onClick={leaveHome} style={navColor} to="/basket">
               <i className="fas fa-shopping-basket nav-link basket-icon" />
             </NavLink>

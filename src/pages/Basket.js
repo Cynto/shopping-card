@@ -33,7 +33,7 @@ function Basket(props) {
         <div className="top-basket-container"></div>
 
         <div className="bottom-basket-container">
-          <h2>My Shopping Cart</h2>
+          <h2>My Shopping Basket</h2>
           <div className="basket-item-container">
             {basketArray.map((item) => (
               <div key={uniqid()} className="basket-item">

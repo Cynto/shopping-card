@@ -106,3 +106,20 @@
   margin-top: 10px;
 }
 
+@media only screen and (max-width: 600px) {
+  .top-shop-container {
+    height: 200px;
+  }
+  .left-shop-container {
+    display: none;
+  }
+  .products-container {
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    row-gap: 50px;
+  }
+  .products-container a {
+    min-height: 0px;
+  }
+}
