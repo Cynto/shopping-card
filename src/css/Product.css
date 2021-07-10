@@ -68,10 +68,15 @@
   margin-top: 100px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 30px;
+  width: 300px;
+}
+.buy-button-container button {
+  padding: 0px 20px;
 }
 .add-button {
-  width: 159px;
+  
   height: 64px;
   font-size: 20px;
   border-radius: 0px;
