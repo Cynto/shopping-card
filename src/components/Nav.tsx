@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../css/Nav.css'
 
-function Nav(props) {
+function Nav(props: any) {
   const { navColor, borderClass, underlineClass, leaveHome } = props;
 
   return (

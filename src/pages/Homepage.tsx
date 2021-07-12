@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
-function Homepage(props) {
+function Homepage(props: any) {
   const { leaveHome, openHome } = props;
 
   useEffect(() => {

@@ -1,17 +1,24 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import uniqid from 'uniqid';
-import SingleItem from './SingleItem';
+import SingleItem from './SingleItem'
 
-function Cases(props) {
-  const { setCategory, casesArray } = props;
+function Motherboards(props: any) {
+  const { motherboardsArray, setCategory } = props;
   useEffect(() => {
-    setCategory('Cases');
+    setCategory('Motherboards');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  interface IsItem {
+    name: string;
+    img: string[];
+    alt: string;
+    price: string;
+    id: string;
+  }
   return (
     <div className="products-container">
-      {casesArray.map((item) => (
+      {motherboardsArray.map((item: IsItem) => (
         <NavLink
           
           key={uniqid()}
@@ -24,4 +31,4 @@ function Cases(props) {
   );
 }
 
-export default Cases;
+export default Motherboards;

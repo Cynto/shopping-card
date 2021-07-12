@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 
-function ShopNav(props) {
+function ShopNav() {
   
   return (
     <div className="shop-nav-container">

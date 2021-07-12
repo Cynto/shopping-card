@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import '../css/Product.css';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
+import AddedMessage from '../components/AddedMessage';
+import Gallery from '../components/Gallery';
+import PropTypes from 'prop-types'
 
-function Product(props) {
+function Product(props: any) {
   const { currentProduct, leaveHome, setBasketArray, basketArray } = props;
   const [img1Class, setImg1Class] = useState('gallery-img img1 active-img');
   const [img2Class, setImg2Class] = useState('gallery-img img2');
   const [imgIndex, setImgIndex] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
-  const [blurStyle, setBlurStyle] = useState({})
+  const [blurStyle, setBlurStyle] = useState({});
 
   useEffect(() => {
     leaveHome();
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
 
-  const setActiveImg = (e) => {
+  const setActiveImg = (e: any) => {
     if (e.target.className.includes('img1')) {
       setImg1Class('gallery-img img1 active-img');
       setImg2Class('gallery-img img2');
@@ -28,15 +32,15 @@ function Product(props) {
     }
   };
   const addToBasket = () => {
-    if (!basketArray.some((item) => item.name === currentProduct.name)) {
+    if (!basketArray.some((item: {name: string}) => item.name === currentProduct.name)) {
       let newItem = currentProduct;
       newItem.quantity = 1;
-      setBasketArray((oldArray) => [...oldArray, newItem]);
+      setBasketArray((oldArray: [{}]) => [...oldArray, newItem]);
     } else {
       let newArray = basketArray;
 
       const index = newArray.findIndex(
-        (item) => item.name === currentProduct.name,
+        (item: {name: string}) => item.name === currentProduct.name,
       );
 
       newArray[index].quantity = newArray[index].quantity + 1;
@@ -47,7 +51,7 @@ function Product(props) {
   const removeFromBasket = () => {
     const newArray = basketArray;
     const index = basketArray.findIndex(
-      (item) => item.name === currentProduct.name,
+      (item: {name: string}) => item.name === currentProduct.name,
     );
     newArray.splice(index, 1);
     setBasketArray([...newArray]);
@@ -58,22 +62,12 @@ function Product(props) {
       <div className="total-product-page-container">
         <div className="top-container"></div>
         <div className="bottom-container" style={blurStyle}>
-          <div className="gallery-container">
-            <img
-              src={currentProduct.img[0]}
-              alt={currentProduct.alt}
-              className={img1Class}
-              onClick={(e) => setActiveImg(e)}
-              onMouseEnter={(e) => setActiveImg(e)}
-            />
-            <img
-              src={currentProduct.img[1]}
-              alt={currentProduct.alt}
-              className={img2Class}
-              onClick={(e) => setActiveImg(e)}
-              onMouseEnter={(e) => setActiveImg(e)}
-            />
-          </div>
+          <Gallery
+            setActiveImg={setActiveImg}
+            currentProduct={currentProduct}
+            img1Class={img1Class}
+            img2Class={img2Class}
+          />
           <div className="main-img-container">
             <img src={currentProduct.img[imgIndex]} alt={currentProduct.alt} />
           </div>
@@ -86,37 +80,37 @@ function Product(props) {
                 onClick={() => {
                   addToBasket();
                   setAddedToCart(true);
-                  setBlurStyle({filter: 'blur(8px)'})
+                  setBlurStyle({ filter: 'blur(8px)' });
                 }}
               >
-                {!basketArray.some((item) => item.name === currentProduct.name)
-                  ? 'Add To Basket'
-                  : 'Add Another To Basket'}
+                Add To Basket
               </button>
-              {basketArray.some((item) => item.name === currentProduct.name) ? (
+              {basketArray.some((item: {name: string}) => item.name === currentProduct.name) ? (
                 <button className="remove-button" onClick={removeFromBasket}>
                   Remove From Basket
                 </button>
               ) : null}
             </div>
           </div>
-          
         </div>
         {addedToCart === true ? (
-            <div className="added-message-container">
-              <div className="main-message-container">
-                <h3>Successfully Added Item To Basket!</h3>
-                <Link to="/basket">
-                  <button>Go To Basket</button>
-                </Link>
-              </div>
-              <button className="exit-button" onClick={() => {setAddedToCart(false); setBlurStyle({})}}>X</button>
-            </div>
-          ) : null}
+          <AddedMessage
+            setAddedToCart={setAddedToCart}
+            setBlurStyle={setBlurStyle}
+          />
+        ) : null}
         <Footer />
       </div>
     </div>
   );
 }
-
+Product.propTypes = {
+  currentProduct: PropTypes.shape({
+    name: PropTypes.string,
+    img: PropTypes.arrayOf(PropTypes.string),
+    price: PropTypes.string,
+    alt: PropTypes.string,
+    id: PropTypes.string,
+  })
+}
 export default Product;

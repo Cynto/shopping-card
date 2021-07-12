@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SingleItem(props) {
+function SingleItem(props: any) {
   const { item } = props;
   const [imgIndex, setImgIndex] = useState(0)
   return (

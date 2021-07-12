@@ -4,15 +4,23 @@ import uniqid from 'uniqid';
 import '../css/Basket.css';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-function Basket(props) {
+function Basket(props: any) {
   const { leaveHome, basketArray, setBasketArray } = props;
   useEffect(() => {
     leaveHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const updateQuantity = (negOrPos, name) => {
-    const index = basketArray.findIndex((item) => item.name === name);
+  interface IsItem {
+    name: string;
+    img: string[];
+    alt: string;
+    price: string;
+    id: string;
+    quantity: number
+  }
+  
+  const updateQuantity = (negOrPos: string, name: string) => {
+    const index = basketArray.findIndex((item: IsItem) => item.name === name);
     let newArray = basketArray;
     if (negOrPos === '+') {
       newArray[index].quantity = newArray[index].quantity + 1;
@@ -21,8 +29,8 @@ function Basket(props) {
     setBasketArray([...newArray]);
   };
 
-  const deleteItem = (name) => {
-    const index = basketArray.findIndex((item) => item.name === name);
+  const deleteItem = (name: string) => {
+    const index = basketArray.findIndex((item: IsItem) => item.name === name);
     let newArray = basketArray;
     newArray.splice(index, 1);
     setBasketArray([...newArray]);
@@ -35,12 +43,10 @@ function Basket(props) {
         <div className="bottom-basket-container">
           <h2>My Shopping Basket</h2>
           <div className="basket-item-container">
-            {basketArray.map((item) => (
+            {(basketArray.length > 0) ? basketArray.map((item: IsItem) => (
               <div key={uniqid()} className="basket-item">
                 <img src={item.img[0]} alt={item.alt} />
-                <Link to={`/product/${item.id}`}>
-                  {item.name}
-                </Link>
+                <Link to={`/product/${item.id}`}>{item.name}</Link>
                 <p className="basket-item-price">{item.price}</p>
                 <div className="quantity-container">
                   <button
@@ -62,7 +68,7 @@ function Basket(props) {
                   Delete
                 </button>
               </div>
-            ))}
+            )) : null }
           </div>
         </div>
         <TotalAmount basketArray={basketArray} />

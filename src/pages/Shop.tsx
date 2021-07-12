@@ -10,8 +10,9 @@ import { Switch, Route } from 'react-router-dom';
 import Motherboards from '../components/Motherboards';
 import GraphicsCards from '../components/GraphicsCards';
 import Footer from '../components/Footer';
+import PropTypes from 'prop-types';
 
-function Shop(props) {
+function Shop(props: any) {
   const [category, setCategory] = useState('All Products');
   const {
     leaveHome,
@@ -26,6 +27,7 @@ function Shop(props) {
     leaveHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+ 
   return (
     <div className="shop">
       <div className="total-container">
@@ -37,7 +39,7 @@ function Shop(props) {
                 Shop / <br /> <p>{category}</p>
               </h3>
             </div>
-            <ShopNav setCategory={setCategory} />
+            <ShopNav />
           </div>
           <div className="shop-items-container">
             <Switch>
@@ -73,5 +75,18 @@ function Shop(props) {
     </div>
   );
 }
+Shop.propTypes = {
+  totalArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      img: PropTypes.arrayOf(PropTypes.string),
+      price: PropTypes.string,
+      alt: PropTypes.string,
+      id: PropTypes.string,
+    }),
+  ),
+  leaveHome: PropTypes.func,
+  
+};
 
 export default Shop;

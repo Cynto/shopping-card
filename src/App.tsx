@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import Homepage from './pages/Homepage';
 import Nav from './components/Nav';
 
@@ -10,13 +10,14 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
   const [navColor, setNavColor] = useState({ color: 'white' });
   const [underlineClass, setUnderlineClass] = useState('white-underline');
-  const [borderClass, setBorderClass] = useState('no-border');
-  const [basketArray, setBasketArray] = useState(
+  const [borderClass, setBorderClass] = useState<string>('no-border');
+  const [basketArray, setBasketArray] = useState<any>(
     localStorage.getItem('basketArray') === null
       ? []
       : () => {
-          let basketArrayLocal = localStorage.getItem('basketArray');
+          let basketArrayLocal: any = localStorage.getItem('basketArray');
           basketArrayLocal = JSON.parse(basketArrayLocal);
+
           return basketArrayLocal;
         },
   );
@@ -25,7 +26,15 @@ function App() {
     style: 'currency',
     currency: 'USD',
   });
-  const casesArray = [
+
+  interface IsItem {
+    name: string;
+    img: string[];
+    alt: string;
+    price: string;
+    id: string;
+  }
+  const casesArray: IsItem[] = [
     {
       name: 'Phanteks Enthoo Primo',
       img: [
@@ -48,7 +57,7 @@ function App() {
       id: 'CORSAIR-4000X-RGB',
     },
   ];
-  const processorsArray = [
+  const processorsArray: IsItem[] = [
     {
       name: 'AMD Ryzen CPU',
       img: [
@@ -70,7 +79,7 @@ function App() {
       id: 'Intel-i9-CPU',
     },
   ];
-  const motherboardsArray = [
+  const motherboardsArray: IsItem[] = [
     {
       name: 'Gigabyte Ga-B365M-D3H Motherboard',
       img: [
@@ -92,7 +101,7 @@ function App() {
       id: 'ASUS-B450-MOTHERBOARD',
     },
   ];
-  const memoryArray = [
+  const memoryArray: IsItem[] = [
     {
       name: 'Corsair High Performance 16GB RAM',
       img: [
@@ -114,7 +123,7 @@ function App() {
       id: 'GSKILL-16GB-RAM',
     },
   ];
-  const gpuArray = [
+  const gpuArray: IsItem[] = [
     {
       name: 'Nvidia RTX 3090 Graphics Card',
       img: [
@@ -157,6 +166,21 @@ function App() {
     setBorderClass('no-border');
     setUnderlineClass('white-underline');
   };
+  const shopProps = {
+    casesArray: casesArray,
+    processorsArray: processorsArray,
+    memoryArray: memoryArray,
+    motherboardsArray: motherboardsArray,
+    gpuArray: gpuArray,
+    totalArray: totalArray,
+    leaveHome: leaveHome,
+  };
+  const productProps = {
+    leaveHome: leaveHome,
+    basketArray: basketArray,
+    setBasketArray: setBasketArray,
+  };
+
   return (
     <Router>
       <div className="App">
@@ -175,27 +199,14 @@ function App() {
           </Route>
 
           <Route path="/shop">
-            <Shop
-              casesArray={casesArray}
-              processorsArray={processorsArray}
-              memoryArray={memoryArray}
-              motherboardsArray={motherboardsArray}
-              gpuArray={gpuArray}
-              totalArray={totalArray}
-              leaveHome={leaveHome}
-            />
+            <Shop {...shopProps} />
           </Route>
           {totalArray.map((currentProduct) => (
             <Route
               key={currentProduct.id}
               path={`/product/${currentProduct.id}`}
             >
-              <Product
-                currentProduct={currentProduct}
-                leaveHome={leaveHome}
-                basketArray={basketArray}
-                setBasketArray={setBasketArray}
-              />
+              <Product currentProduct={currentProduct} {...productProps} />
             </Route>
           ))}
           <Route path="/basket">
