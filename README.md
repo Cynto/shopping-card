@@ -10,3 +10,4 @@ This Project is part of [The Odin Project Curriculum](https://www.theodinproject
 
 - [React](https://reactjs.org/)
 - [currency.js](https://currency.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
