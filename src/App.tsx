@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Homepage from './pages/Homepage';
 import Nav from './components/Nav';
 
@@ -20,7 +20,7 @@ function App() {
     if (localStorage.getItem('basketArray') !== null) {
       let basketArrayLocal: any = localStorage.getItem('basketArray');
       basketArrayLocal = JSON.parse(basketArrayLocal);
-      console.log(basketArrayLocal);
+
       dispatch(getLocal(basketArrayLocal));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
