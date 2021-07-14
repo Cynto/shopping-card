@@ -9,7 +9,7 @@ function Memory(props: any) {
     setCategory('Memory');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  interface IsItem {
+  interface ShopItem {
     name: string;
     img: string[];
     alt: string;
@@ -18,7 +18,7 @@ function Memory(props: any) {
   }
   return (
     <div className="products-container">
-      {memoryArray.map((item: IsItem) => (
+      {memoryArray.map((item: ShopItem) => (
         <NavLink
           
           key={uniqid()}

@@ -9,7 +9,7 @@ function Processors(props: any) {
     setCategory('Processors');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  interface IsItem {
+  interface ShopItem {
     name: string;
     img: string[];
     alt: string;
@@ -18,7 +18,7 @@ function Processors(props: any) {
   }
   return (
     <div className="products-container">
-      {processorsArray.map((item: IsItem) => (
+      {processorsArray.map((item: ShopItem) => (
         <NavLink
           
           key={uniqid()}

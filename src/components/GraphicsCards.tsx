@@ -9,7 +9,7 @@ function GraphicsCards(props: any) {
     setCategory('Graphics Cards');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  interface IsItem {
+  interface ShopItem {
     name: string;
     img: string[];
     alt: string;
@@ -18,7 +18,7 @@ function GraphicsCards(props: any) {
   }
   return (
     <div className="products-container">
-      {gpuArray.map((item: IsItem) => (
+      {gpuArray.map((item: ShopItem) => (
         <NavLink
           
           key={uniqid()}

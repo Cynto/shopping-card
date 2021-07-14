@@ -9,7 +9,7 @@ function Motherboards(props: any) {
     setCategory('Motherboards');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  interface IsItem {
+  interface ShopItem {
     name: string;
     img: string[];
     alt: string;
@@ -18,7 +18,7 @@ function Motherboards(props: any) {
   }
   return (
     <div className="products-container">
-      {motherboardsArray.map((item: IsItem) => (
+      {motherboardsArray.map((item: ShopItem) => (
         <NavLink
           
           key={uniqid()}

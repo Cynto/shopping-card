@@ -4,15 +4,19 @@ import Footer from '../components/Footer';
 import AddedMessage from '../components/AddedMessage';
 import Gallery from '../components/Gallery';
 import PropTypes from 'prop-types'
+import { useSelector, useDispatch } from 'react-redux';
+import {removeItem, addItem, updateQuantityA} from '../actions/index'
 
 function Product(props: any) {
-  const { currentProduct, leaveHome, setBasketArray, basketArray } = props;
+  const { currentProduct, leaveHome} = props;
   const [img1Class, setImg1Class] = useState('gallery-img img1 active-img');
   const [img2Class, setImg2Class] = useState('gallery-img img2');
   const [imgIndex, setImgIndex] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
   const [blurStyle, setBlurStyle] = useState({});
-
+  
+  const basketArray = useSelector((state: any) => state.basketArray);
+  const dispatch = useDispatch();
   useEffect(() => {
     leaveHome();
     
@@ -35,26 +39,23 @@ function Product(props: any) {
     if (!basketArray.some((item: {name: string}) => item.name === currentProduct.name)) {
       let newItem = currentProduct;
       newItem.quantity = 1;
-      setBasketArray((oldArray: [{}]) => [...oldArray, newItem]);
+      dispatch(addItem(newItem))
     } else {
-      let newArray = basketArray;
-
-      const index = newArray.findIndex(
+      const index = basketArray.findIndex(
         (item: {name: string}) => item.name === currentProduct.name,
       );
 
-      newArray[index].quantity = newArray[index].quantity + 1;
-      setBasketArray([...newArray]);
+      
+      dispatch(updateQuantityA({index, negOrPos: '+'}))
     }
   };
 
   const removeFromBasket = () => {
-    const newArray = basketArray;
+    
     const index = basketArray.findIndex(
       (item: {name: string}) => item.name === currentProduct.name,
     );
-    newArray.splice(index, 1);
-    setBasketArray([...newArray]);
+    dispatch(removeItem(index))
   };
 
   return (

@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import TotalAmount from '../components/TotalAmount';
 import uniqid from 'uniqid';
 import '../css/Basket.css';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {updateQuantityA, removeItem} from '../actions/index'
+
+
 function Basket(props: any) {
-  const { leaveHome, basketArray, setBasketArray } = props;
+  const { leaveHome} = props;
+  const dispatch = useDispatch();
   useEffect(() => {
     leaveHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  interface IsItem {
+    }, []);
+  interface BasketItem {
     name: string;
     img: string[];
     alt: string;
@@ -18,22 +23,19 @@ function Basket(props: any) {
     id: string;
     quantity: number
   }
+  const basketArray = useSelector((state: any) => state.basketArray);
+  
+  
   
   const updateQuantity = (negOrPos: string, name: string) => {
-    const index = basketArray.findIndex((item: IsItem) => item.name === name);
-    let newArray = basketArray;
-    if (negOrPos === '+') {
-      newArray[index].quantity = newArray[index].quantity + 1;
-    } else newArray[index].quantity = newArray[index].quantity - 1;
-
-    setBasketArray([...newArray]);
+    const index = basketArray.findIndex((item: BasketItem) => item.name === name);
+    const payloadObject: {index: number, negOrPos: string} = {index, negOrPos}
+    dispatch(updateQuantityA(payloadObject))
   };
 
   const deleteItem = (name: string) => {
-    const index = basketArray.findIndex((item: IsItem) => item.name === name);
-    let newArray = basketArray;
-    newArray.splice(index, 1);
-    setBasketArray([...newArray]);
+    const index = basketArray.findIndex((item: BasketItem) => item.name === name);
+    dispatch(removeItem(index))
   };
   return (
     <div className="basket">
@@ -43,7 +45,7 @@ function Basket(props: any) {
         <div className="bottom-basket-container">
           <h2>My Shopping Basket</h2>
           <div className="basket-item-container">
-            {(basketArray.length > 0) ? basketArray.map((item: IsItem) => (
+            {(basketArray.length > 0) ? basketArray.map((item: BasketItem) => (
               <div key={uniqid()} className="basket-item">
                 <img src={item.img[0]} alt={item.alt} />
                 <Link to={`/product/${item.id}`}>{item.name}</Link>

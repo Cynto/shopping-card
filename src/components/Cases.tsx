@@ -9,7 +9,7 @@ function Cases(props: any) {
     setCategory('Cases');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  interface IsItem {
+  interface ShopItem {
     name: string;
     img: string[];
     alt: string;
@@ -18,7 +18,7 @@ function Cases(props: any) {
   }
   return (
     <div className="products-container">
-      {casesArray.map((item: IsItem) => (
+      {casesArray.map((item: ShopItem) => (
         <NavLink
           
           key={uniqid()}

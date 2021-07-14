@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect} from 'react';
 import Homepage from './pages/Homepage';
 import Nav from './components/Nav';
 
@@ -6,35 +6,42 @@ import Basket from './pages/Basket';
 import Shop from './pages/Shop';
 import Product from './pages/Product';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getLocal } from './actions/index';
 
 function App() {
   const [navColor, setNavColor] = useState({ color: 'white' });
   const [underlineClass, setUnderlineClass] = useState('white-underline');
   const [borderClass, setBorderClass] = useState<string>('no-border');
-  const [basketArray, setBasketArray] = useState<any>(
-    localStorage.getItem('basketArray') === null
-      ? []
-      : () => {
-          let basketArrayLocal: any = localStorage.getItem('basketArray');
-          basketArrayLocal = JSON.parse(basketArrayLocal);
 
-          return basketArrayLocal;
-        },
-  );
+  const dispatch = useDispatch();
+  const basketArray = useSelector((state: any) => state.basketArray);
+  useEffect(() => {
+    if (localStorage.getItem('basketArray') !== null) {
+      let basketArrayLocal: any = localStorage.getItem('basketArray');
+      basketArrayLocal = JSON.parse(basketArrayLocal);
+      console.log(basketArrayLocal);
+      dispatch(getLocal(basketArrayLocal));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('basketArray', JSON.stringify(basketArray));
+  }, [basketArray]);
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   });
 
-  interface IsItem {
+  interface ShopItem {
     name: string;
     img: string[];
     alt: string;
     price: string;
     id: string;
   }
-  const casesArray: IsItem[] = [
+  const casesArray: ShopItem[] = [
     {
       name: 'Phanteks Enthoo Primo',
       img: [
@@ -57,7 +64,7 @@ function App() {
       id: 'CORSAIR-4000X-RGB',
     },
   ];
-  const processorsArray: IsItem[] = [
+  const processorsArray: ShopItem[] = [
     {
       name: 'AMD Ryzen CPU',
       img: [
@@ -79,7 +86,7 @@ function App() {
       id: 'Intel-i9-CPU',
     },
   ];
-  const motherboardsArray: IsItem[] = [
+  const motherboardsArray: ShopItem[] = [
     {
       name: 'Gigabyte Ga-B365M-D3H Motherboard',
       img: [
@@ -101,7 +108,7 @@ function App() {
       id: 'ASUS-B450-MOTHERBOARD',
     },
   ];
-  const memoryArray: IsItem[] = [
+  const memoryArray: ShopItem[] = [
     {
       name: 'Corsair High Performance 16GB RAM',
       img: [
@@ -123,7 +130,7 @@ function App() {
       id: 'GSKILL-16GB-RAM',
     },
   ];
-  const gpuArray: IsItem[] = [
+  const gpuArray: ShopItem[] = [
     {
       name: 'Nvidia RTX 3090 Graphics Card',
       img: [
@@ -152,10 +159,6 @@ function App() {
     memoryArray,
   );
 
-  useEffect(() => {
-    localStorage.setItem('basketArray', JSON.stringify(basketArray));
-  }, [basketArray]);
-
   const leaveHome = () => {
     setNavColor({ color: '#1f1f1f' });
     setUnderlineClass('black-underline');
@@ -167,18 +170,17 @@ function App() {
     setUnderlineClass('white-underline');
   };
   const shopProps = {
-    casesArray: casesArray,
-    processorsArray: processorsArray,
-    memoryArray: memoryArray,
-    motherboardsArray: motherboardsArray,
-    gpuArray: gpuArray,
-    totalArray: totalArray,
-    leaveHome: leaveHome,
+    casesArray,
+    processorsArray,
+    memoryArray,
+    motherboardsArray,
+    gpuArray,
+    totalArray,
+    leaveHome,
   };
   const productProps = {
-    leaveHome: leaveHome,
-    basketArray: basketArray,
-    setBasketArray: setBasketArray,
+    leaveHome,
+    basketArray,
   };
 
   return (
@@ -210,11 +212,7 @@ function App() {
             </Route>
           ))}
           <Route path="/basket">
-            <Basket
-              basketArray={basketArray}
-              setBasketArray={setBasketArray}
-              leaveHome={leaveHome}
-            />
+            <Basket basketArray={basketArray} leaveHome={leaveHome} />
           </Route>
         </Switch>
       </div>
