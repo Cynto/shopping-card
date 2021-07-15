@@ -5,21 +5,24 @@ const basketReducer = (state = [], action: any) => {
       return localArray;
     case 'ADD_ITEM':
       let newState: any[] = [...state, action.payload];
-      
+
       return newState;
     case 'REMOVE_ITEM':
       let newState2: any[] = [...state];
       newState2.splice(action.payload, 1);
       return newState2;
     case 'UPDATE_QUANTITY':
-      let updatedArray: any[] = [...state];
-      let payloadObject = action.payload;
+      let payloadObject = { ...action.payload };
 
-      const index = payloadObject.index;
-      if (payloadObject.negOrPos === '+') {
-        updatedArray[index].quantity = updatedArray[index].quantity + 1;
-      } else updatedArray[index].quantity = updatedArray[index].quantity - 1;
-      return updatedArray;
+      const indexToUpdate = payloadObject.index;
+
+      return state.map((item: any, index) => {
+        if (index === indexToUpdate) {
+          if (payloadObject.negOrPos === '+') {
+            return { ...item, quantity: (item.quantity += 1) };
+          } else return { ...item, quantity: (item.quantity -= 1) };
+        }
+      });
     default:
       return state;
   }
