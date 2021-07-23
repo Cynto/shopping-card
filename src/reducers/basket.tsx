@@ -1,16 +1,15 @@
 const basketReducer = (state = [], action: any) => {
   switch (action.type) {
     case 'GET_LOCAL':
-      const localArray = action.payload;
-      return localArray;
+      return [...action.payload]
     case 'ADD_ITEM':
-      let newState: any[] = [...state, action.payload];
+      return [...state, action.payload];
 
-      return newState;
     case 'REMOVE_ITEM':
-      let newState2: any[] = [...state];
-      newState2.splice(action.payload, 1);
-      return newState2;
+      return state.filter(
+        (item: any, index: number) => index !== action.payload,
+      );
+
     case 'UPDATE_QUANTITY':
       let payloadObject = { ...action.payload };
 
