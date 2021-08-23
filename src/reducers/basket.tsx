@@ -1,7 +1,7 @@
 const basketReducer = (state = [], action: any) => {
   switch (action.type) {
     case 'GET_LOCAL':
-      return [...action.payload]
+      return [...action.payload];
     case 'ADD_ITEM':
       return [...state, action.payload];
 
@@ -11,16 +11,20 @@ const basketReducer = (state = [], action: any) => {
       );
 
     case 'UPDATE_QUANTITY':
-      let payloadObject = { ...action.payload };
+      let payloadObject = action.payload;
 
       const indexToUpdate = payloadObject.index;
 
       return state.map((item: any, index) => {
         if (index === indexToUpdate) {
           if (payloadObject.negOrPos === '+') {
-            return { ...item, quantity: (item.quantity += 1) };
-          } else return { ...item, quantity: (item.quantity -= 1) };
-        }
+            item.quantity += 1;
+            return item;
+          } else {
+            item.quantity -= 1;
+            return item;
+          }
+        } else return item;
       });
     default:
       return state;

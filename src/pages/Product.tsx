@@ -3,26 +3,43 @@ import '../css/Product.css';
 import Footer from '../components/Footer';
 import AddedMessage from '../components/AddedMessage';
 import Gallery from '../components/Gallery';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import {removeItem, addItem, updateQuantityA} from '../actions/index'
+import {
+  removeItem,
+  addItem,
+  updateQuantityA,
+  getLocal,
+} from '../actions/index';
+import firebase from '../Firebase';
+import 'firebase/firestore';
+import 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Product(props: any) {
-  const { currentProduct, leaveHome} = props;
+  const { currentProduct, leaveHome, index } = props;
   const [img1Class, setImg1Class] = useState('gallery-img img1 active-img');
   const [img2Class, setImg2Class] = useState('gallery-img img2');
   const [imgIndex, setImgIndex] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
   const [blurStyle, setBlurStyle] = useState({});
-  
+
   const basketArray = useSelector((state: any) => state.basketArray);
   const dispatch = useDispatch();
   useEffect(() => {
     leaveHome();
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  let userBasketsRef: any;
+  let unsubscribe;
+  const [user] = useAuthState(auth);
+
+  if (user) {
+    userBasketsRef = db.collection('userBasket');
+  }
 
   const setActiveImg = (e: any) => {
     if (e.target.className.includes('img1')) {
@@ -36,27 +53,45 @@ function Product(props: any) {
     }
   };
   const addToBasket = () => {
-    if (!basketArray.some((item: {name: string}) => item.name === currentProduct.name)) {
+    console.log(currentProduct.name);
+    if (
+      !basketArray.some(
+        (item: { name: string }) => item.name === currentProduct.name,
+      )
+    ) {
       let newItem = currentProduct;
       newItem.quantity = 1;
-      dispatch(addItem(newItem))
+      dispatch(addItem(newItem));
     } else {
-      const index = basketArray.findIndex(
-        (item: {name: string}) => item.name === currentProduct.name,
-      );
-
-      
-      dispatch(updateQuantityA({index, negOrPos: '+'}))
+      dispatch(updateQuantityA({ index, negOrPos: '+' }));
     }
   };
 
-  const removeFromBasket = () => {
-    
-    const index = basketArray.findIndex(
-      (item: {name: string}) => item.name === currentProduct.name,
-    );
-    dispatch(removeItem(index))
+  const removeFromBasket = (index: number) => {
+    dispatch(removeItem(index));
   };
+  useEffect(() => {
+    if (user) {
+      const userBasketRef = userBasketsRef.doc(user.uid);
+      userBasketRef.get().then((docSnapshot: any) => {
+        if (docSnapshot.exists) {
+          const basket = docSnapshot.data().basketArray;
+          dispatch(getLocal(basket));
+        }
+      });
+    }
+  }, []);
+  useEffect(() => {
+    console.log(basketArray[1])
+    if (user && !basketArray.some((item: any) => item === undefined)) {
+      userBasketsRef
+        .doc(user.uid)
+        .set({ basketArray: basketArray, uid: user.uid });
+    }
+  }, [basketArray]);
+  useEffect(() => {
+    console.log(currentProduct);
+  }, [currentProduct]);
 
   return (
     <div className="product-page">
@@ -86,8 +121,13 @@ function Product(props: any) {
               >
                 Add To Basket
               </button>
-              {basketArray.some((item: {name: string}) => item.name === currentProduct.name) ? (
-                <button className="remove-button" onClick={removeFromBasket}>
+              {basketArray.some(
+                (item: { name: string }) => item.name === currentProduct.name,
+              ) ? (
+                <button
+                  className="remove-button"
+                  onClick={() => removeFromBasket(index)}
+                >
                   Remove From Basket
                 </button>
               ) : null}
@@ -112,6 +152,6 @@ Product.propTypes = {
     price: PropTypes.string,
     alt: PropTypes.string,
     id: PropTypes.string,
-  })
-}
+  }),
+};
 export default Product;

@@ -66,6 +66,9 @@
 .shop-nav {
   position: relative;
 }
+a {
+  cursor: pointer;
+}
 
 .search {
   font-size: 25px;

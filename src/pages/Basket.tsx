@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TotalAmount from '../components/TotalAmount';
 import uniqid from 'uniqid';
 import '../css/Basket.css';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateQuantityA, removeItem } from '../actions/index';
+import { updateQuantityA, removeItem, getLocal } from '../actions/index';
+import firebase from '../Firebase';
+import 'firebase/firestore';
+import 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Basket(props: any) {
   const { leaveHome } = props;
@@ -33,12 +37,39 @@ function Basket(props: any) {
     dispatch(updateQuantityA(payloadObject));
   };
 
-  const deleteItem = (name: string) => {
-    const index = basketArray.findIndex(
-      (item: BasketItem) => item.name === name,
-    );
+  const deleteItem = (name: string, index: number) => {
     dispatch(removeItem(index));
   };
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  let userBasketsRef: any;
+  let unsubscribe;
+  const [user] = useAuthState(auth);
+
+  if (user) {
+    userBasketsRef = db.collection('userBasket');
+  }
+
+  useEffect(() => {
+    if (user) {
+      const userBasketRef = userBasketsRef.doc(user.uid);
+      userBasketRef.get().then((docSnapshot: any) => {
+        if (docSnapshot.exists) {
+          const basket = docSnapshot.data().basketArray;
+          dispatch(getLocal(basket));
+        }
+      });
+    }
+  }, []);
+  useEffect(() => {
+    
+    if (user && basketArray[0] !== undefined) {
+      userBasketsRef.doc(user.uid).set({
+        uid: user.uid,
+        basketArray,
+      });
+    }
+  }, [basketArray]);
   return (
     <div className="basket">
       <div className="total-container">
@@ -68,7 +99,7 @@ function Basket(props: any) {
                     </div>
                     <button
                       className="basket-delete"
-                      onClick={() => deleteItem(item.name)}
+                      onClick={() => deleteItem(item.name, index)}
                     >
                       Delete
                     </button>

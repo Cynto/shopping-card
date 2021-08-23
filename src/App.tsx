@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import firebase from 'firebase';
+import 'firebase/firestore';
+import 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import Homepage from './pages/Homepage';
 import Nav from './components/Nav';
 
@@ -158,7 +162,27 @@ function App() {
     gpuArray,
     memoryArray,
   );
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  let userBasketsRef: any;
+  let unsubscribe;
+  const [user] = useAuthState(auth);
 
+  if (user) {
+    userBasketsRef = db.collection('userBasket');
+  }
+
+  useEffect(() => {
+    if (user) {
+      const userBasketRef = userBasketsRef.doc(user.uid);
+      userBasketRef.get().then((docSnapshot: any) => {
+        if (docSnapshot.exists) {
+          const basket = docSnapshot.data().basketArray;
+          dispatch(getLocal(basket));
+        }
+      });
+    }
+  }, [user]);
   const leaveHome = () => {
     setNavColor({ color: '#1f1f1f' });
     setUnderlineClass('black-underline');
@@ -181,6 +205,7 @@ function App() {
   const productProps = {
     leaveHome,
     basketArray,
+    index: 0,
   };
 
   return (
@@ -203,14 +228,17 @@ function App() {
           <Route path="/shop">
             <Shop {...shopProps} />
           </Route>
-          {totalArray.map((currentProduct) => (
-            <Route
-              key={currentProduct.id}
-              path={`/product/${currentProduct.id}`}
-            >
-              <Product currentProduct={currentProduct} {...productProps} />
-            </Route>
-          ))}
+          {totalArray.map((currentProduct, index) => {
+            productProps.index = index;
+            return (
+              <Route
+                key={currentProduct.id}
+                path={`/product/${currentProduct.id}`}
+              >
+                <Product currentProduct={currentProduct} {...productProps} />
+              </Route>
+            );
+          })}
           <Route path="/basket">
             <Basket basketArray={basketArray} leaveHome={leaveHome} />
           </Route>
