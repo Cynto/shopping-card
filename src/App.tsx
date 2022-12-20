@@ -60,7 +60,7 @@ function App() {
     {
       name: 'Corsair iCUE 4000X RGB',
       img: [
-        'https://images-na.ssl-images-amazon.com/images/I/81MvIP9T0mL._AC_SL1500_.jpg',
+        'https://www.corsair.com/medias/sys_master/images/images/h1f/hcf/9584653860894/base-4000x-rgb-config/Gallery/4000X_BLACK_01/-base-4000x-rgb-config-Gallery-4000X-BLACK-01.png_515Wx515H',
         'https://cwsmgmt.corsair.com/pdp/4000-series/corsair-4000x/images/all-the-storage-comp-mobile.png',
       ],
       alt: 'Corsair PC Case',
@@ -72,7 +72,7 @@ function App() {
     {
       name: 'AMD Ryzen CPU',
       img: [
-        'https://infonetonline.org/wp-content/uploads/2021/02/0821-000-5580.jpg',
+        'https://infonetonline.org/wp-content/uploads/2021/12/0821-000-5580-1.jpg',
         'https://m.media-amazon.com/images/I/61d5eSkfnpL._AC_SS450_.jpg',
       ],
       price: formatter.format(499.9),
@@ -82,7 +82,7 @@ function App() {
     {
       name: 'Intel i9 CPU',
       img: [
-        'https://www.zenick.it/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/0/1/01c43106-751a-4fa4-962b-28f6160c15fe.jpg',
+        'https://m.media-amazon.com/images/I/61oiLbWvC-L.jpg',
         'https://images-na.ssl-images-amazon.com/images/I/81eoV5SY8RL._AC_SY450_.jpg',
       ],
       price: formatter.format(659.41),
@@ -165,11 +165,13 @@ function App() {
   const auth = firebase.auth();
   const db = firebase.firestore();
   let userBasketsRef: any;
+  let usersRef: any;
   let unsubscribe;
   const [user] = useAuthState(auth);
 
   if (user) {
     userBasketsRef = db.collection('userBasket');
+    usersRef = db.collection('users');
   }
 
   useEffect(() => {
@@ -179,6 +181,17 @@ function App() {
         if (docSnapshot.exists) {
           const basket = docSnapshot.data().basketArray;
           dispatch(getLocal(basket));
+        }
+      });
+      const { serverTimestamp } = firebase.firestore.FieldValue;
+      const userRef = db.collection('users').doc(user.uid);
+      userRef.get().then((docSnapshot) => {
+        if (!docSnapshot.exists) {
+          usersRef.doc(user.uid).set({
+            uid: user.uid,
+            name: user.displayName,
+            createdAt: serverTimestamp(),
+          });
         }
       });
     }
